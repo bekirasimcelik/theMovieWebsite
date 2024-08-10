@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { movieApiSlice } from "../slices/movieApiSlice";
 
-// Slices
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    [movieApiSlice.reducerPath]: movieApiSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(movieApiSlice.middleware),
 });
 
 export default store;
