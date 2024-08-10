@@ -94,7 +94,7 @@ const DetailPage: React.FC = () => {
           </div>
 
           <div className="cast-container mt-8">
-            <h3 className="text-xl font-bold mb-4">Cast Members</h3>
+            <h3 className="text-xl text-white font-bold mb-4">Cast Members</h3>
             <div className="flex space-x-4 overflow-x-auto">
               {credits.cast.map(
                 (actor: {
