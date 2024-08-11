@@ -8,10 +8,7 @@ interface MovieListingProps {
 const MovieListing: React.FC<MovieListingProps> = ({ movies }) => {
   return (
     <div className="movie-wrapper overflow-x-auto">
-      <div
-        className="movie-list flex space-x-4"
-        style={{ width: "calc(100% * 7)" }}
-      >
+      <div className="movie-list flex space-x-4">
         {movies &&
           movies.map((movie) => (
             <MovieCard
