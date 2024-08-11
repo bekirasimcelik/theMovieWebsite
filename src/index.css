@@ -23,3 +23,12 @@ body {
 p {
   color: white;
 }
+
+.flex::-webkit-scrollbar {
+  display: none;
+}
+
+.flex {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
