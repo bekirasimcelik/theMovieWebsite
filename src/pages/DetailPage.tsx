@@ -50,7 +50,7 @@ const DetailPage: React.FC = () => {
 
         <div className="details-container w-full md:w-2/3 md:ml-8">
           <h1 className="text-4xl text-white font-bold mb-4">{movie.title}</h1>
-          <p className="text-lg text-white mb-4">{movie.overview}</p>
+          {/* <p className="text-lg text-white mb-4">{movie.overview}</p> */}
           <div className="flex space-x-4 mb-6">
             <FaRegImage className="text-gray-600" size={24} />
             <FaRegBookmark className="text-gray-600" size={24} />
@@ -89,7 +89,7 @@ const DetailPage: React.FC = () => {
 
           <div className="release-date-chart mb-6">
             <div className="bg-gray-200 h-32 rounded-lg shadow-inner p-4">
-              <p className="text-sm text-gray-600">Release Date Chart</p>
+              <p className="text-sm text-gray-600">{movie.overview}</p>
             </div>
           </div>
 
