@@ -18,9 +18,12 @@ const FavouritePage: React.FC = () => {
   return (
     <Layout>
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl text-white font-bold mb-6">My Favourites</h1>
+        <h1 className="text-3xl text-[gold] font-bold mb-6">My Favourites</h1>
         {favourites.length === 0 ? (
-          <Link to="/" className="text-2xl font-bold text-white">
+          <Link
+            to="/"
+            className="text-2xl text-[gold] hover:text-transparent bg-clip-text bg-gradient-to-b from-red-500 via-[gold] to-black font-bold"
+          >
             No favourites added yet. Would you like to check it more?
           </Link>
         ) : (
