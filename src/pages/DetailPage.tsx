@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFavourite, selectFavourites } from "../slices/favouriteSlice";
 import { FaHeart, FaRegHeart, FaRegBookmark, FaRegImage } from "react-icons/fa";
 
-const IMG_BASE_URL = "https://image.tmdb.org/t/p/w1280";
+const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -66,24 +66,24 @@ const DetailPage: React.FC = () => {
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <p className="font-bold">Release Date:</p>
-              <p>{movie.release_date}</p>
+              <p className="font-bold text-white">Release Date:</p>
+              <p className="text-white">{movie.release_date}</p>
             </div>
             <div>
-              <p className="font-bold">Rating:</p>
-              <p>{movie.vote_average} / 10</p>
+              <p className="font-bold text-white">Rating:</p>
+              <p className="text-white">{movie.vote_average} / 10</p>
             </div>
             <div>
-              <p className="font-bold">Genre:</p>
-              <p>
+              <p className="font-bold text-white">Genre:</p>
+              <p className="text-white">
                 {movie.genres.map((genre: { id: number; name: string }) => (
                   <span key={genre.id}>{genre.name}, </span>
                 ))}
               </p>
             </div>
             <div>
-              <p className="font-bold">Popularity:</p>
-              <p>{movie.popularity}</p>
+              <p className="font-bold text-white">Popularity:</p>
+              <p className="text-white">{movie.popularity}</p>
             </div>
           </div>
 
@@ -96,31 +96,32 @@ const DetailPage: React.FC = () => {
           <div className="cast-container mt-8">
             <h3 className="text-xl text-white font-bold mb-4">Cast Members</h3>
             <div className="flex space-x-4 overflow-x-auto">
-              {credits.cast.map(
-                (actor: {
-                  id: number;
-                  name: string;
-                  profile_path: string;
-                  character: string;
-                }) => (
-                  <div
-                    key={actor.id}
-                    className="w-24 h-24 flex-shrink-0 bg-gray-300 rounded-full shadow-lg overflow-hidden"
-                  >
+              {credits.cast.map((actor) => (
+                <div
+                  key={actor.id}
+                  className="flex-shrink-0 flex flex-col items-center w-24"
+                >
+                  <div className="w-24 h-24">
                     <img
-                      src={`${IMG_BASE_URL}${actor.profile_path}`}
+                      src={
+                        actor.profile_path
+                          ? `${IMG_BASE_URL}${actor.profile_path}`
+                          : "/placeholder-image.jpg"
+                      }
                       alt={actor.name}
-                      className="w-full h-full object-cover"
+                      className="rounded-full shadow-lg w-full h-full object-cover"
                     />
-                    <div className="text-center mt-2 text-sm text-gray-700">
+                  </div>
+                  <div className="flex flex-col items-center text-center h-[70px]">
+                    <div className="text-sm text-white mt-2 flex-grow">
                       {actor.name}
                     </div>
-                    <div className="text-center mt-1 text-xs text-gray-500">
+                    <div className="text-xs text-gray-400">
                       {actor.character}
                     </div>
                   </div>
-                )
-              )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
