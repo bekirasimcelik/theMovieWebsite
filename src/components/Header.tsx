@@ -11,13 +11,13 @@ const Header: React.FC = () => {
         </Link>
         <nav className="hidden md:flex space-x-8">
           <Link to="/trending" className="text-gray-800 hover:text-blue-600">
-            Trending
+            Films
           </Link>
           <Link to="/top-rated" className="text-gray-800 hover:text-blue-600">
-            Top Rated
+            Series
           </Link>
           <Link to="/popular" className="text-gray-800 hover:text-blue-600">
-            Popular
+            Actors
           </Link>
           <Link to="/favourites" className="text-gray-800 hover:text-blue-600">
             Favourites

@@ -5,7 +5,11 @@ import {
   useGetMovieCreditsQuery,
 } from "../slices/movieApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavourite, selectFavourites } from "../slices/favouriteSlice";
+import {
+  addFavourite,
+  removeFavourite,
+  selectFavourites,
+} from "../slices/favouriteSlice";
 import { FaHeart, FaRegHeart, FaRegBookmark, FaRegImage } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -51,6 +55,28 @@ const DetailPage: React.FC = () => {
     }
   };
 
+  const handleRemoveFavourite = () => {
+    if (movie && isFavourite) {
+      dispatch(removeFavourite(movie));
+      toast.info(
+        <>
+          <strong>Removed!</strong>
+          <br />
+          The film has been removed from your favorites!
+        </>,
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+    }
+  };
+
   if (isMovieLoading || isCreditsLoading) return <div>Loading...</div>;
   if (movieError || creditsError || !movie || !credits)
     return <div>Error fetching movie details or credits</div>;
@@ -73,7 +99,11 @@ const DetailPage: React.FC = () => {
             <FaRegImage className="text-gray-600" size={24} />
             <FaRegBookmark className="text-gray-600" size={24} />
             {isFavourite ? (
-              <FaHeart className="text-red-600" size={24} />
+              <FaHeart
+                className="text-red-600 cursor-pointer"
+                size={24}
+                onClick={handleRemoveFavourite}
+              />
             ) : (
               <FaRegHeart
                 className="text-gray-600 cursor-pointer"
