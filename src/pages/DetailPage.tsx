@@ -13,8 +13,18 @@ import {
 import { FaHeart, FaRegHeart, FaRegBookmark, FaRegImage } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import StarRatings from "react-star-ratings";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import { colors } from "@mui/material";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
+
+const getBackgroundColorByRating = (rating: number): string => {
+  if (rating >= 8) return "bg-green-700";
+  if (rating >= 5) return "bg-yellow-700";
+  return "bg-red-700";
+};
 
 const DetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -81,8 +91,10 @@ const DetailPage: React.FC = () => {
   if (movieError || creditsError || !movie || !credits)
     return <div>Error fetching movie details or credits</div>;
 
+  const backgroundColor = getBackgroundColorByRating(movie.vote_average);
+
   return (
-    <div className="detail-page container mx-auto p-6">
+    <div className={`detail-page container mx-auto p-6 ${backgroundColor}`}>
       <ToastContainer />
       <div className="flex flex-col md:flex-row items-center md:items-start">
         <div className="poster-container w-full md:w-1/3 mb-6 md:mb-0">
@@ -115,23 +127,50 @@ const DetailPage: React.FC = () => {
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
               <p className="font-bold text-white">Release Date:</p>
-              <p className="text-white">{movie.release_date}</p>
+              <p className="text-[gold]">{movie.release_date}</p>
             </div>
             <div>
               <p className="font-bold text-white">Rating:</p>
-              <p className="text-white">{movie.vote_average} / 10</p>
+              <div className="flex items-center">
+                <StarRatings
+                  rating={movie.vote_average / 2}
+                  starRatedColor="gold"
+                  numberOfStars={5}
+                  starDimension="20px"
+                  starSpacing="2px"
+                  name="rating"
+                />
+                <div
+                  className="ml-2 rounded-full border-2 border-gold-500 text-gold-500 p-2 text-sm flex items-center justify-center"
+                  style={{
+                    borderColor: "gold",
+                    color: "gold",
+                    minWidth: "40px",
+                    minHeight: "40px",
+                  }}
+                >
+                  {Number.parseFloat(movie.vote_average).toFixed(1)}
+                </div>
+              </div>
             </div>
             <div>
               <p className="font-bold text-white">Genre:</p>
-              <p className="text-white">
+              <Stack direction="row" spacing={1}>
                 {movie.genres.map((genre: { id: number; name: string }) => (
-                  <span key={genre.id}>{genre.name}, </span>
+                  <Chip
+                    key={genre.id}
+                    label={genre.name}
+                    sx={{ color: "gold" }}
+                    color="info"
+                  />
                 ))}
-              </p>
+              </Stack>
             </div>
             <div>
               <p className="font-bold text-white">Popularity:</p>
-              <p className="text-white">{movie.popularity}</p>
+              <p className="text-[gold]">
+                {Number.parseFloat(movie.popularity).toFixed(0)} Votes
+              </p>
             </div>
           </div>
 
