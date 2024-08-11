@@ -96,8 +96,8 @@ const DetailPage: React.FC = () => {
         <div className="details-container w-full md:w-2/3 md:ml-8">
           <h1 className="text-4xl text-white font-bold mb-4">{movie.title}</h1>
           <div className="flex space-x-4 mb-6">
-            <FaRegImage className="text-gray-600" size={24} />
-            <FaRegBookmark className="text-gray-600" size={24} />
+            <FaRegImage className="text-white" size={24} />
+            <FaRegBookmark className="text-white" size={24} />
             {isFavourite ? (
               <FaHeart
                 className="text-red-600 cursor-pointer"
@@ -106,7 +106,7 @@ const DetailPage: React.FC = () => {
               />
             ) : (
               <FaRegHeart
-                className="text-gray-600 cursor-pointer"
+                className="text-white cursor-pointer"
                 size={24}
                 onClick={handleAddFavourite}
               />
