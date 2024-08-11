@@ -7,6 +7,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { addFavourite, selectFavourites } from "../slices/favouriteSlice";
 import { FaHeart, FaRegHeart, FaRegBookmark, FaRegImage } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -30,6 +32,22 @@ const DetailPage: React.FC = () => {
   const handleAddFavourite = () => {
     if (movie && !isFavourite) {
       dispatch(addFavourite(movie));
+      toast.success(
+        <>
+          <strong>Success!</strong>
+          <br />
+          The film has been added to your favorites!
+        </>,
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     }
   };
 
@@ -39,6 +57,7 @@ const DetailPage: React.FC = () => {
 
   return (
     <div className="detail-page container mx-auto p-6">
+      <ToastContainer />
       <div className="flex flex-col md:flex-row items-center md:items-start">
         <div className="poster-container w-full md:w-1/3 mb-6 md:mb-0">
           <img
@@ -50,7 +69,6 @@ const DetailPage: React.FC = () => {
 
         <div className="details-container w-full md:w-2/3 md:ml-8">
           <h1 className="text-4xl text-white font-bold mb-4">{movie.title}</h1>
-          {/* <p className="text-lg text-white mb-4">{movie.overview}</p> */}
           <div className="flex space-x-4 mb-6">
             <FaRegImage className="text-gray-600" size={24} />
             <FaRegBookmark className="text-gray-600" size={24} />
