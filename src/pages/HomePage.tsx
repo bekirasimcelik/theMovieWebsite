@@ -4,7 +4,7 @@ import {
   useGetMoviesByCategoryQuery,
 } from "../slices/movieApiSlice";
 import MovieListing from "../components/MovieListing";
-import Header from "../components/Header";
+import Layout from "../components/Layout";
 
 const HomePage: React.FC = () => {
   const { data: trendingData, isLoading: isTrendingLoading } =
@@ -15,11 +15,15 @@ const HomePage: React.FC = () => {
     useGetMoviesByCategoryQuery("popular");
 
   return (
-    <>
-      <Header />
-      <div className="container mx-auto px-4">
+    <Layout>
+      <div
+        className="container rounded-md mx-auto px-4 bg-gradient-to-b from-red-500 via-[gold] to-black min-h-screen"
+        style={{ backgroundColor: "#f0f4f8" }}
+      >
         <div className="my-8">
-          <h2 className="text-2xl text-white font-bold mb-4">Trend Movies</h2>
+          <h2 className="text-2xl text-gray-900 font-bold mb-4">
+            Trend Movies
+          </h2>
           {isTrendingLoading ? (
             <p>Loading...</p>
           ) : (
@@ -28,7 +32,7 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="my-8">
-          <h2 className="text-2xl text-white font-bold mb-4">
+          <h2 className="text-2xl text-gray-900 font-bold mb-4">
             Top Rated Movies
           </h2>
           {isTopRatedLoading ? (
@@ -39,7 +43,9 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="my-8">
-          <h2 className="text-2xl text-white font-bold mb-4">Popular Movies</h2>
+          <h2 className="text-2xl text-gray-900 font-bold mb-4">
+            Popular Movies
+          </h2>
           {isPopularLoading ? (
             <p>Loading...</p>
           ) : (
@@ -47,7 +53,7 @@ const HomePage: React.FC = () => {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 
